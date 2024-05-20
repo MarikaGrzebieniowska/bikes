@@ -2,6 +2,9 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.2.5'
 	id 'io.spring.dependency-management' version '1.1.4'
+	id 'codenarc'
+	id 'checkstyle'
+	id 'com.github.spotbugs' version '6.0.9'
 }
 
 group = 'pl.marika.pjatk.mas'
@@ -25,4 +28,44 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+checkstyle {
+	toolVersion = '10.15.0'
+	configFile = file("${project.rootDir}/config/checkstyle/checkstyle.xml")
+	showViolations = true
+	ignoreFailures = false
+}
+
+spotbugs {
+	excludeFilter = file("${rootDir}/config/spotbugs/exclude.xml")
+	ignoreFailures = false
+	showProgress = true
+}
+
+codenarc {
+	toolVersion = '3.4.0-groovy-4.0'
+	configFile = file("${project.projectDir}/config/codenarc/ruleset.groovy")
+}
+
+tasks.register('codenarcMain', CodeNarc) {
+	source = sourceSets.main.allJava
+	configFile = file('config/codenarc/codenarc.groovy')
+	classpath = sourceSets.main.compileClasspath
+}
+
+tasks.register('codenarcTest', CodeNarc) {
+	source = sourceSets.test.allJava
+	classpath = sourceSets.test.runtimeClasspath
+	reports {
+		html.required.set(true)
+		html.outputLocation.set(layout.buildDirectory.file("reports/codenarc/test.html"))
+	}
+}
+
+test {
+	useJUnitPlatform()
+	testLogging {
+		events 'PASSED', 'SKIPPED', 'FAILED'
+	}
 }
