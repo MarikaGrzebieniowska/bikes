@@ -6,4 +6,5 @@ import pl.marika.pjatk.mas.bikes.model.Repair;
 
 @Repository
 public interface RepairRepository extends JpaRepository<Repair, Long> {
+
 }

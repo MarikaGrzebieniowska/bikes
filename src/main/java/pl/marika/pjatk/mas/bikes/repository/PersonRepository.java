@@ -6,4 +6,5 @@ import pl.marika.pjatk.mas.bikes.model.Person;
 
 @Repository
 public interface PersonRepository extends JpaRepository<Person, Long> {
+
 }

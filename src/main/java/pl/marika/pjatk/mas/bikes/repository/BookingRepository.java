@@ -6,4 +6,5 @@ import pl.marika.pjatk.mas.bikes.model.Booking;
 
 @Repository
 public interface BookingRepository extends JpaRepository<Booking, Long> {
+
 }

@@ -31,7 +31,7 @@ public class Repair {
 
     private String description;
 
-    private double invoicedAmount = 0;
+    private double invoicedAmount;
 
     public Bike getBike() {
         return bike;
