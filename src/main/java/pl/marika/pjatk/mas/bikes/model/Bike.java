@@ -33,7 +33,7 @@ public class Bike {
 
     private BigDecimal pricePerDay;
 
-    private String SN;
+    private String serialNumber;
 
     @Enumerated(STRING)
     private BikeStatus status = BikeStatus.AVAILABLE;
@@ -88,12 +88,12 @@ public class Bike {
         this.pricePerDay = pricePerDay;
     }
 
-    public String getSN() {
-        return SN;
+    public String getSerialNumber() {
+        return serialNumber;
     }
 
-    public void setSN(String SN) {
-        this.SN = SN;
+    public void setSerialNumber(String sn) {
+        this.serialNumber = sn;
     }
 
     public BikeStatus getStatus() {

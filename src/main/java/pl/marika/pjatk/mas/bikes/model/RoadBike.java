@@ -7,4 +7,11 @@ public class RoadBike extends Bike {
 
     private int gearCount;
 
+    public int getGearCount() {
+        return gearCount;
+    }
+
+    public void setGearCount(int gearCount) {
+        this.gearCount = gearCount;
+    }
 }

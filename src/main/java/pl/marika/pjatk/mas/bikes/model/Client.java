@@ -9,4 +9,11 @@ public class Client extends Person {
 
     private int discountPercent = 0;
 
+    public int getDiscountPercent() {
+        return discountPercent;
+    }
+
+    public void setDiscountPercent(int discountPercent) {
+        this.discountPercent = discountPercent;
+    }
 }

@@ -11,4 +11,19 @@ public class Mechanic extends Employee {
 
     private List<Bike.BikeType> specializations;
 
+    public String getLicenceNr() {
+        return licenceNr;
+    }
+
+    public void setLicenceNr(String licenceNr) {
+        this.licenceNr = licenceNr;
+    }
+
+    public List<Bike.BikeType> getSpecializations() {
+        return specializations;
+    }
+
+    public void setSpecializations(List<Bike.BikeType> specializations) {
+        this.specializations = specializations;
+    }
 }
