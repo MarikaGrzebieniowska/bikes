@@ -1,4 +1,4 @@
-package pl.marika.pjatk.mas.bikes;
+package pl.marika.pjatk.mas.bikes.model;
 
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.Embedded;
@@ -46,6 +46,62 @@ public class Bike {
 
     public enum BikeStatus {
         AVAILABLE, RENTED, IN_REPAIR
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public Size getSize() {
+        return size;
+    }
+
+    public void setSize(Size size) {
+        this.size = size;
+    }
+
+    public boolean isElectric() {
+        return electric;
+    }
+
+    public void setElectric(boolean electric) {
+        this.electric = electric;
+    }
+
+    public BigDecimal getPricePerDay() {
+        return pricePerDay;
+    }
+
+    public void setPricePerDay(BigDecimal pricePerDay) {
+        this.pricePerDay = pricePerDay;
+    }
+
+    public String getSN() {
+        return SN;
+    }
+
+    public void setSN(String SN) {
+        this.SN = SN;
+    }
+
+    public BikeStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(BikeStatus status) {
+        this.status = status;
     }
 
     @Embeddable

@@ -1,9 +1,8 @@
-package pl.marika.pjatk.mas.bikes;
+package pl.marika.pjatk.mas.bikes.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 import java.time.LocalDate;
@@ -11,26 +10,20 @@ import java.time.LocalDate;
 import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Entity
-public class Repair {
+public class Booking {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "bike_id")
-    private Bike bike;
+    private Client client;
 
     @ManyToOne
-    @JoinColumn(name = "mechanic_id")
-    private Mechanic mechanic;
+    private Bike bike;
 
     private LocalDate startDate;
 
     private LocalDate endDate;
-
-    private String description;
-
-    private double invoicedAmount = 0;
 
 }

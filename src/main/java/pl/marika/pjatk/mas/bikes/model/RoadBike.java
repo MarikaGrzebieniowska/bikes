@@ -1,4 +1,4 @@
-package pl.marika.pjatk.mas.bikes;
+package pl.marika.pjatk.mas.bikes.model;
 
 import jakarta.persistence.Entity;
 

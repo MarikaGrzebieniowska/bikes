@@ -1,6 +1,8 @@
-package pl.marika.pjatk.mas.bikes;
+package pl.marika.pjatk.mas.bikes.service;
 
 import org.springframework.stereotype.Service;
+import pl.marika.pjatk.mas.bikes.model.Booking;
+import pl.marika.pjatk.mas.bikes.repository.BookingRepository;
 
 import java.util.List;
 
