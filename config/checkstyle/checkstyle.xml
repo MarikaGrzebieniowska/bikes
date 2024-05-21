@@ -10,7 +10,7 @@
     <property name="charset" value="UTF-8"/>
 
     <module name="UniqueProperties">
-        <property name="fileExtensions" value="properties"/>
+        <property name="fileExtensions" value="clientProperties"/>
     </module>
 
     <module name="BeforeExecutionExclusionFileFilter">

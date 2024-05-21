@@ -5,7 +5,7 @@ import jakarta.persistence.Entity;
 @Entity
 public class Client extends Person {
 
-    private static final int MAX_DISCOUNT_PERCENT = 45;
+    public static int MAX_DISCOUNT_PERCENT;
 
     private int discountPercent;
 
@@ -16,4 +16,5 @@ public class Client extends Person {
     public void setDiscountPercent(int discountPercent) {
         this.discountPercent = discountPercent;
     }
+
 }

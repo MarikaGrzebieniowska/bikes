@@ -4,9 +4,12 @@ import static jakarta.persistence.DiscriminatorType.STRING;
 import static jakarta.persistence.GenerationType.IDENTITY;
 import static jakarta.persistence.InheritanceType.SINGLE_TABLE;
 import static pl.marika.pjatk.mas.bikes.model.Bike.BikeStatus.AVAILABLE;
+import static pl.marika.pjatk.mas.bikes.model.Bike.Size.Unit.CM;
+import static pl.marika.pjatk.mas.bikes.model.Bike.Size.Unit.INCH;
 
 import java.math.BigDecimal;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.Embedded;
@@ -126,9 +129,11 @@ public abstract class Bike {
     @Embeddable
     public static class Size {
 
+        @Column(name = "size")
         private int number;
 
         @Enumerated(EnumType.STRING)
+        @Column(name = "size_unit")
         private Unit unit;
 
         public enum Unit {
@@ -151,9 +156,13 @@ public abstract class Bike {
         public Size() {
         }
 
-        public Size(int number, Unit unit) {
+        private Size(int number, Unit unit) {
             this.number = number;
             this.unit = unit;
+        }
+
+        public static Size of(int size) {
+            return size >= 35 ? new Size(size, CM) : new Size(size, INCH);
         }
 
         public int getNumber() {

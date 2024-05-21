@@ -11,6 +11,8 @@ public class GravelBike extends Bike {
 
     double weigh;
 
+    int tyreWidth;
+
     protected GravelBike() {
     }
 
@@ -20,9 +22,11 @@ public class GravelBike extends Bike {
                       boolean electric,
                       BigDecimal pricePerDay,
                       String serialNumber,
-                      double weigh) {
+                      double weigh,
+                      int tyreWidth) {
         super(brand, model, size, electric, pricePerDay, serialNumber);
         this.weigh = weigh;
+        this.tyreWidth = tyreWidth;
     }
 
     public double getWeigh() {
@@ -33,4 +37,11 @@ public class GravelBike extends Bike {
         this.weigh = weigh;
     }
 
+    public int getTyreWidth() {
+        return tyreWidth;
+    }
+
+    public void setTyreWidth(int tyreWidth) {
+        this.tyreWidth = tyreWidth;
+    }
 }
