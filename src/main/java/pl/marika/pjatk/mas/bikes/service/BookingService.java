@@ -1,5 +1,6 @@
 package pl.marika.pjatk.mas.bikes.service;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -22,5 +23,9 @@ public class BookingService {
 
     public Booking save(Booking booking) {
         return bookingRepository.save(booking);
+    }
+
+    public void saveAll(Collection<Booking> bookings) {
+        bookingRepository.saveAll(bookings);
     }
 }
