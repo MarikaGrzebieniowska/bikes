@@ -1,14 +1,14 @@
 package pl.marika.pjatk.mas.bikes.model;
 
+import static jakarta.persistence.GenerationType.IDENTITY;
+
+import java.time.LocalDate;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-
-import java.time.LocalDate;
-
-import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Entity
 public class Repair {
@@ -32,6 +32,19 @@ public class Repair {
     private String description;
 
     private double invoicedAmount;
+
+    protected Repair() {
+    }
+
+    public Repair(Bike bike, Mechanic mechanic, LocalDate startDate) {
+        this.bike = bike;
+        this.mechanic = mechanic;
+        this.startDate = startDate;
+    }
+
+    public Long getId() {
+        return id;
+    }
 
     public Bike getBike() {
         return bike;

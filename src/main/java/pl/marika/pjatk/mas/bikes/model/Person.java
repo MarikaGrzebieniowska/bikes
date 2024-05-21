@@ -1,21 +1,21 @@
 package pl.marika.pjatk.mas.bikes.model;
 
+import static jakarta.persistence.GenerationType.TABLE;
+import static jakarta.persistence.InheritanceType.TABLE_PER_CLASS;
+
+import java.time.LocalDate;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 
-import java.time.LocalDate;
-
-import static jakarta.persistence.GenerationType.IDENTITY;
-import static jakarta.persistence.InheritanceType.JOINED;
-
 @Entity
-@Inheritance(strategy = JOINED)
-public class Person {
+@Inheritance(strategy = TABLE_PER_CLASS)
+public abstract class Person {
 
     @Id
-    @GeneratedValue(strategy = IDENTITY)
+    @GeneratedValue(strategy = TABLE)
     private Long id;
 
     private String firstName;
@@ -27,6 +27,21 @@ public class Person {
     private String phoneNumber;
 
     private LocalDate birthDate;
+
+    protected Person() {
+    }
+
+    protected Person(String firstName, String lastName, String email, String phoneNumber, LocalDate birthDate) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.birthDate = birthDate;
+    }
+
+    public Long getId() {
+        return id;
+    }
 
     public String getFirstName() {
         return firstName;

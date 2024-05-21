@@ -1,11 +1,15 @@
 package pl.marika.pjatk.mas.bikes.model;
 
-import jakarta.persistence.Entity;
+import static jakarta.persistence.InheritanceType.JOINED;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Inheritance;
+
 @Entity
-public class Employee extends Person {
+@Inheritance(strategy = JOINED)
+public abstract class Employee extends Person {
 
     private String pesel;
 
@@ -34,6 +38,23 @@ public class Employee extends Person {
     }
 
     public void setSalary(double salary) {
+        this.salary = salary;
+    }
+
+    protected Employee() {
+    }
+
+    protected Employee(String firstName,
+                       String lastName,
+                       String email,
+                       String phoneNumber,
+                       LocalDate birthDate,
+                       String pesel,
+                       LocalDate employmentDate,
+                       double salary) {
+        super(firstName, lastName, email, phoneNumber, birthDate);
+        this.pesel = pesel;
+        this.employmentDate = employmentDate;
         this.salary = salary;
     }
 }

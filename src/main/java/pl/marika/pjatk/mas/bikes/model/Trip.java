@@ -1,16 +1,17 @@
 package pl.marika.pjatk.mas.bikes.model;
 
+import static jakarta.persistence.GenerationType.IDENTITY;
+
+import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
-
-import java.time.LocalDateTime;
-import java.util.List;
-
-import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Entity
 public class Trip {
@@ -33,7 +34,21 @@ public class Trip {
         joinColumns = @JoinColumn(name = "trip_id"),
         inverseJoinColumns = @JoinColumn(name = "person_id")
     )
-    private List<Person> participants;
+    private Set<Person> participants = new HashSet<>();
+
+    protected Trip() {
+    }
+
+    public Trip(String name, int length, int maxClients, LocalDateTime dateTime) {
+        this.name = name;
+        this.length = length;
+        this.maxClients = maxClients;
+        this.dateTime = dateTime;
+    }
+
+    public Long getId() {
+        return id;
+    }
 
     public String getName() {
         return name;
@@ -67,11 +82,11 @@ public class Trip {
         this.dateTime = dateTime;
     }
 
-    public List<Person> getParticipants() {
+    public Set<Person> getParticipants() {
         return participants;
     }
 
-    public void setParticipants(List<Person> participants) {
+    public void setParticipants(Set<Person> participants) {
         this.participants = participants;
     }
 }

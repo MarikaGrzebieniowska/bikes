@@ -1,22 +1,26 @@
 package pl.marika.pjatk.mas.bikes.model;
 
+import static jakarta.persistence.DiscriminatorType.STRING;
+import static jakarta.persistence.GenerationType.IDENTITY;
+import static jakarta.persistence.InheritanceType.SINGLE_TABLE;
+import static pl.marika.pjatk.mas.bikes.model.Bike.BikeStatus.AVAILABLE;
+
+import java.math.BigDecimal;
+
+import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 
-import java.math.BigDecimal;
-
-import static jakarta.persistence.EnumType.STRING;
-import static jakarta.persistence.GenerationType.IDENTITY;
-import static jakarta.persistence.InheritanceType.JOINED;
-
 @Entity
-@Inheritance(strategy = JOINED)
-public class Bike {
+@Inheritance(strategy = SINGLE_TABLE)
+@DiscriminatorColumn(name = "type", discriminatorType = STRING)
+public abstract class Bike {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -35,17 +39,32 @@ public class Bike {
 
     private String serialNumber;
 
-    @Enumerated(STRING)
-    private BikeStatus status = BikeStatus.AVAILABLE;
-
-    public enum BikeType {
-        MTB,
-        ROAD,
-        GRAVEL,
-    }
+    @Enumerated(EnumType.STRING)
+    private BikeStatus status = AVAILABLE;
 
     public enum BikeStatus {
         AVAILABLE, RENTED, IN_REPAIR
+    }
+
+    protected Bike() {
+    }
+
+    protected Bike(String brand,
+                String model,
+                Size size,
+                boolean electric,
+                BigDecimal pricePerDay,
+                String serialNumber) {
+        this.brand = brand;
+        this.model = model;
+        this.size = size;
+        this.electric = electric;
+        this.pricePerDay = pricePerDay;
+        this.serialNumber = serialNumber;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getBrand() {
@@ -109,7 +128,7 @@ public class Bike {
 
         private int number;
 
-        @Enumerated(STRING)
+        @Enumerated(EnumType.STRING)
         private Unit unit;
 
         public enum Unit {

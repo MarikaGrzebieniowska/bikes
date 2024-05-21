@@ -1,15 +1,33 @@
 package pl.marika.pjatk.mas.bikes.model;
 
-import jakarta.persistence.Entity;
+import java.time.LocalDate;
 
-import java.util.List;
+import jakarta.persistence.Entity;
 
 @Entity
 public class Mechanic extends Employee {
 
     private String licenceNr;
 
-    private List<Bike.BikeType> specializations;
+    private boolean knowsElectricBikes;
+
+    protected Mechanic() {
+    }
+
+    public Mechanic(String firstName,
+                    String lastName,
+                    String email,
+                    String phoneNumber,
+                    LocalDate birthDate,
+                    String pesel,
+                    LocalDate employmentDate,
+                    double salary,
+                    String licenceNr,
+                    boolean knowsElectricBikes) {
+        super(firstName, lastName, email, phoneNumber, birthDate, pesel, employmentDate, salary);
+        this.licenceNr = licenceNr;
+        this.knowsElectricBikes = knowsElectricBikes;
+    }
 
     public String getLicenceNr() {
         return licenceNr;
@@ -19,11 +37,4 @@ public class Mechanic extends Employee {
         this.licenceNr = licenceNr;
     }
 
-    public List<Bike.BikeType> getSpecializations() {
-        return specializations;
-    }
-
-    public void setSpecializations(List<Bike.BikeType> specializations) {
-        this.specializations = specializations;
-    }
 }

@@ -1,17 +1,18 @@
 package pl.marika.pjatk.mas.bikes.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
+
 import pl.marika.pjatk.mas.bikes.model.Booking;
 import pl.marika.pjatk.mas.bikes.repository.BookingRepository;
-
-import java.util.List;
 
 @Service
 public class BookingService {
 
     private BookingRepository bookingRepository;
 
-    public BookingService(BookingRepository bookingRepository) {
+    BookingService(BookingRepository bookingRepository) {
         this.bookingRepository = bookingRepository;
     }
 
