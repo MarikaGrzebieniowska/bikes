@@ -1,8 +1,10 @@
 package pl.marika.pjatk.mas.bikes.model;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Mechanic extends Employee {
@@ -10,6 +12,9 @@ public class Mechanic extends Employee {
     private String licenceNr;
 
     private boolean knowsElectricBikes;
+
+    @OneToMany(mappedBy = "mechanic")
+    private List<Repair> repairs;
 
     protected Mechanic() {
     }

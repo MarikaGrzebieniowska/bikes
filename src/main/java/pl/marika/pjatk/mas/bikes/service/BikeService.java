@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import org.springframework.stereotype.Service;
 
+import jakarta.transaction.Transactional;
 import pl.marika.pjatk.mas.bikes.model.Bike;
 import pl.marika.pjatk.mas.bikes.repository.BikeRepository;
 
@@ -16,7 +17,13 @@ public class BikeService {
         this.bikeRepository = bikeRepository;
     }
 
+    @Transactional
     public void saveAll(Collection<Bike> bikes) {
         bikeRepository.saveAll(bikes);
+    }
+
+    @Transactional
+    public Bike findBike(String serialNumber) {
+        return bikeRepository.findBySerialNumber(serialNumber);
     }
 }

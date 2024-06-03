@@ -8,6 +8,7 @@ import static pl.marika.pjatk.mas.bikes.model.Bike.Size.Unit.CM;
 import static pl.marika.pjatk.mas.bikes.model.Bike.Size.Unit.INCH;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorColumn;
@@ -19,6 +20,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
+import jakarta.persistence.OneToMany;
 
 @Entity
 @Inheritance(strategy = SINGLE_TABLE)
@@ -40,7 +42,14 @@ public abstract class Bike {
 
     private BigDecimal pricePerDay;
 
+    @Column(unique = true)
     private String serialNumber;
+
+    @OneToMany(mappedBy = "bike")
+    private List<Booking> bookings;
+
+    @OneToMany(mappedBy = "bike")
+    private List<Repair> repairs;
 
     @Enumerated(EnumType.STRING)
     private BikeStatus status = AVAILABLE;
@@ -114,8 +123,16 @@ public abstract class Bike {
         return serialNumber;
     }
 
-    public void setSerialNumber(String sn) {
-        this.serialNumber = sn;
+    public void setSerialNumber(String serialNumber) {
+        this.serialNumber = serialNumber;
+    }
+
+    public List<Booking> getBookings() {
+        return bookings;
+    }
+
+    public void setBookings(List<Booking> bookings) {
+        this.bookings = bookings;
     }
 
     public BikeStatus getStatus() {

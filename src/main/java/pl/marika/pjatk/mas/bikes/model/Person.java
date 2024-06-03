@@ -1,27 +1,31 @@
 package pl.marika.pjatk.mas.bikes.model;
 
-import static jakarta.persistence.GenerationType.TABLE;
+import static jakarta.persistence.GenerationType.SEQUENCE;
 import static jakarta.persistence.InheritanceType.TABLE_PER_CLASS;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
+import jakarta.persistence.SequenceGenerator;
 
 @Entity
 @Inheritance(strategy = TABLE_PER_CLASS)
 public abstract class Person {
 
     @Id
-    @GeneratedValue(strategy = TABLE)
+    @GeneratedValue(strategy = SEQUENCE, generator = "person_seq")
+    @SequenceGenerator(name = "person_seq", sequenceName = "person_seq", allocationSize = 1)
     private Long id;
 
     private String firstName;
 
     private String lastName;
 
+    @Column(unique = true)
     private String email;
 
     private String phoneNumber;

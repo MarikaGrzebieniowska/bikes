@@ -30,7 +30,7 @@ public class Trip {
 
     @ManyToMany
     @JoinTable(
-        name = "trip_participants",
+        name = "trips_participants",
         joinColumns = @JoinColumn(name = "trip_id"),
         inverseJoinColumns = @JoinColumn(name = "person_id")
     )
@@ -89,4 +89,15 @@ public class Trip {
     public void setParticipants(Set<Person> participants) {
         this.participants = participants;
     }
+
+    public void addParticipant(Person person) {
+        participants.add(person);
+    }
+
+    public boolean maxClientsReached() {
+        return participants.stream()
+            .filter(Client.class::isInstance)
+            .count() >= maxClients;
+    }
+
 }
