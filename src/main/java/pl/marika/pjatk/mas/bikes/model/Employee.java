@@ -2,15 +2,20 @@ package pl.marika.pjatk.mas.bikes.model;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.validation.constraints.Min;
 
 @Entity
 public abstract class Employee extends Person {
 
+    @Column(nullable = false)
     private String pesel;
 
+    @Column(nullable = false)
     private LocalDate employmentDate;
 
+    @Min(value = 5000, message = "Salary must be at least 5000")
     private double salary;
 
     protected Employee() {

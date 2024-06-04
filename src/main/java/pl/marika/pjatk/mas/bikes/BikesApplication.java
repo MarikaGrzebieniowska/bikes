@@ -60,7 +60,7 @@ public class BikesApplication {
 
         List<Employee> employees = Arrays.asList(
             new Guide("Leonard", "Kościółek", "l.kosciolek@biketours.pl", "+48 852115392", LocalDate.of(1982, 11, 5), "82110300456", now(), 5000.00, true),
-            new Mechanic("Sobiesława", "Borczyk", "s.borczyk@biketours.pl", "+48 653470764", LocalDate.of(2004, 2, 13), "04321907961", now(), 4500.00, "GH33452", false),
+            new Mechanic("Sobiesława", "Borczyk", "s.borczyk@biketours.pl", "+48 653470764", LocalDate.of(2004, 2, 13), "04321907961", now(), 5500.00, "GH33452", false),
             new Mechanic("Felicjan", "Durda", "f.durda@biketours.pl", "+48 329437686", LocalDate.of(1995, 8, 2), "95120214675", now(), 6000.00, "ZYG6-AZ", true)
         );
         operator.saveAllEmployees(employees);
@@ -90,8 +90,8 @@ public class BikesApplication {
         // Rowery bywaja w naprawie u mechaników [1:*]
         operator.sendBikeForRepair("s.borczyk@biketours.pl", "CD00763437");
         operator.sendBikeForRepair("l.kosciolek@biketours.pl", "SN02KL9522"); // Nie jest Mechanikiem - zaloguje ERROR
-
-        log.info("WPISY W BAZIE DO OBEJRZENIA: http://localhost:8080/h2-console/ JDBC URL: jdbc:h2:mem:bikes login 'sa', password: password");
+        operator.markBikeAsFixed("CD00763437", "Fixed fork, exchanged cranckset", 150);
+        log.info("*** CLICK HERE! *** --> WPISY W BAZIE http://localhost:8080/h2-console/ JDBC URL: jdbc:h2:mem:bikes login 'sa', password: password");
 
     }
 

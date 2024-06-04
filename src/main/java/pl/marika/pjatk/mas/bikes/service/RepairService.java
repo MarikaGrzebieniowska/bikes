@@ -1,6 +1,10 @@
 package pl.marika.pjatk.mas.bikes.service;
 
-import java.time.LocalDate;
+import static java.time.LocalDate.now;
+import static pl.marika.pjatk.mas.bikes.model.Bike.BikeStatus.AVAILABLE;
+import static pl.marika.pjatk.mas.bikes.model.Bike.BikeStatus.IN_REPAIR;
+
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -33,7 +37,21 @@ public class RepairService {
             throw new IllegalArgumentException("Employee is not a Mechanic, can't create Repair entry.");
         }
         Bike bike = bikeService.findBike(bikeSerialNumber);
-        Repair repair = new Repair(bike, (Mechanic) employee, LocalDate.now());
+        Repair repair = new Repair(bike, (Mechanic) employee, now());
+        bike.setStatus(IN_REPAIR);
         repairRepository.save(repair);
     }
+
+    @Transactional
+    public void markBikeAsFixed(String bikeSerialNumber, String description, double price) {
+        Bike bike = bikeService.findBike(bikeSerialNumber);
+        Optional<Repair> maybeRepair = repairRepository.findTopByBikeOrderByStartDateDesc(bike);
+        maybeRepair.ifPresent(repair -> {
+            repair.setDescription(description);
+            repair.setInvoicedAmount(price);
+            repair.setEndDate(now());
+            bike.setStatus(AVAILABLE);
+        });
+    }
+
 }

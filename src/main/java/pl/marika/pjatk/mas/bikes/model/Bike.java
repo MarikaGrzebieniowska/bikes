@@ -31,18 +31,20 @@ public abstract class Bike {
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String brand;
 
     private String model;
 
     @Embedded
+    @Column(nullable = false)
     private Size size;
 
     private boolean electric;
 
     private BigDecimal pricePerDay;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String serialNumber;
 
     @OneToMany(mappedBy = "bike")
@@ -133,6 +135,14 @@ public abstract class Bike {
 
     public void setBookings(List<Booking> bookings) {
         this.bookings = bookings;
+    }
+
+    public List<Repair> getRepairs() {
+        return repairs;
+    }
+
+    public void setRepairs(List<Repair> repairs) {
+        this.repairs = repairs;
     }
 
     public BikeStatus getStatus() {

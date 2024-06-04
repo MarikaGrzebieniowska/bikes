@@ -4,6 +4,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -25,6 +26,7 @@ public class Repair {
     @JoinColumn(name = "mechanic_id")
     private Mechanic mechanic;
 
+    @Column(nullable = false)
     private LocalDate startDate;
 
     private LocalDate endDate;

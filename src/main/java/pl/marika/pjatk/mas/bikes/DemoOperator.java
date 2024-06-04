@@ -121,4 +121,8 @@ public class DemoOperator {
             log.error(e.getMessage());
         }
     }
+
+    public void markBikeAsFixed(String bikeSerialNumber, String description, double price) {
+        repairService.markBikeAsFixed(bikeSerialNumber, description, price);
+    }
 }
